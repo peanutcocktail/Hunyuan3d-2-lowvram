@@ -38,26 +38,14 @@ module.exports = {
         ]
       }
     },
-    {
-      when: "{{platform === 'linux'}}",
-      method: "shell.run",
-      params: {
-        message: [
-          "conda install -y -c conda-forge 'gxx<12'",
-          "which g++"
-        ]
-      }
-    },
     // Edit this step with your custom install commands
     {
-      when: "{{platform === 'linux'}}",
       method: "shell.run",
       params: {
         venv: "../../../env",                // Edit this to customize the venv folder path
         env: {
           USE_NINJA: 0,
           DISTUTILS_USE_SDK: 1,
-          NVCC_PREPEND_FLAGS: "-ccbin {{which('g++')}}"
         },
         path: "app/hy3dgen/texgen/custom_rasterizer",                // Edit this to customize the path to start the shell from
         message: [
@@ -66,44 +54,12 @@ module.exports = {
       }
     },
     {
-      when: "{{platform !== 'linux'}}",
-      method: "shell.run",
-      params: {
-        venv: "../../../env",                // Edit this to customize the venv folder path
-        env: {
-          USE_NINJA: 0,
-          DISTUTILS_USE_SDK: 1
-        },
-        path: "app/hy3dgen/texgen/custom_rasterizer",                // Edit this to customize the path to start the shell from
-        message: [
-          "python setup.py install"
-        ]
-      }
-    },
-    {
-      when: "{{platform === 'linux'}}",
       method: "shell.run",
       params: {
         venv: "../../../env",                // Edit this to customize the venv folder path
         env: {
           USE_NINJA: 0,
           DISTUTILS_USE_SDK: 1,
-          NVCC_PREPEND_FLAGS: "-ccbin {{which('g++')}}"
-        },
-        path: "app/hy3dgen/texgen/differentiable_renderer",                // Edit this to customize the path to start the shell from
-        message: [
-          "python setup.py install"
-        ]
-      }
-    },
-    {
-      when: "{{platform !== 'linux'}}",
-      method: "shell.run",
-      params: {
-        venv: "../../../env",                // Edit this to customize the venv folder path
-        env: {
-          USE_NINJA: 0,
-          DISTUTILS_USE_SDK: 1
         },
         path: "app/hy3dgen/texgen/differentiable_renderer",                // Edit this to customize the path to start the shell from
         message: [
